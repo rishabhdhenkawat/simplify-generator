@@ -144,9 +144,10 @@ def app():
     
     stream = StringIO()
     with redirect_stdout(stream):
-        window = webview.create_window('PrivacyFlash Pro', server,url='./interface/index.html', background_color='#f8f9fa', width=1366, height=768, text_select=True)
+        window = webview.create_window('PrivacyFlash Pro',url='./interface/index.html', background_color='#f8f9fa', width=1366, height=768, text_select=True)
+        webview.start(http_server=True, debug=False if isPackaged else True)
 
-#         window = webview.create_window('My first pywebview application', server)
-        webview.start(debug=True)
+#         #window = webview.create_window('My first pywebview application', server)
+#        webview.start(debug=True,http_server=True)
 
 app()
