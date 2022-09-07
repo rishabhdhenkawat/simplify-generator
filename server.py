@@ -5,7 +5,7 @@ from functools import wraps
 
 from flask import Flask, render_template, jsonify, request
 import webview
-import app
+# import app
 
 gui_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'gui')  # development path
 
