@@ -2,7 +2,7 @@ import json
 import os
 import webbrowser
 from functools import wraps
-
+import logging
 from flask import Flask, render_template, jsonify, request
 import webview
 # import app
