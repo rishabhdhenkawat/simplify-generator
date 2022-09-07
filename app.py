@@ -7,6 +7,14 @@ from src.privacy_practices import load_data
 from src.configure_data import configure_data
 from pathlib import Path
 
+from contextlib import redirect_stdout
+from io import StringIO
+from server import server
+
+
+logger = logging.getLogger(__name__)
+
+
 isPackaged = getattr(sys, 'frozen', False)
 directory = str(Path.home())
 path = os.path.join(str(Path.home()), 'Library/Application Support/PrivacyFlash Pro') 
@@ -133,5 +141,12 @@ def app():
     window = webview.create_window('PrivacyFlash Pro', url='./interface/index.html', background_color='#f8f9fa', width=1366, height=768, text_select=True)
     window._js_api = Api(window)
     webview.start(http_server=True, debug=False if isPackaged else True)
+    
+    stream = StringIO()
+    with redirect_stdout(stream):
+        window = webview.create_window('PrivacyFlash Pro', server,url='./interface/index.html', background_color='#f8f9fa', width=1366, height=768, text_select=True)
+
+#         window = webview.create_window('My first pywebview application', server)
+        webview.start(debug=True)
 
 app()
